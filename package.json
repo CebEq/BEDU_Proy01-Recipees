@@ -1,0 +1,14 @@
+{
+  "name": "proyecto-bedu",
+  "version": "1.0.0",
+  "description": "proyecto bedu fase 2",
+  "main": "recetas.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Grupo 2 Reloaded",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^5.74.0"
+  }
+}
