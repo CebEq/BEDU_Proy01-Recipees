@@ -104,13 +104,16 @@ div#title {
 
 #div_modalContenedor {
     text-align: center;
-    width: 95%;
+    /* width: 95%;
     margin-left: 35px;
-    padding-left: 35px;
+    padding-left: 35px; */
 }
 
 #div_modal {
     padding-bottom: 2vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #div_modal > .card {
