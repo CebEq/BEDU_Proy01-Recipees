@@ -77,7 +77,7 @@ function consultarReseta(){
                     })
                 }
                 else{
-                    parrResultado.innerText = 'Sorry, the recipe you are looking for was not found, try the chef's suggestion';
+                    parrResultado.innerText = "Sorry, the recipe you are looking for was not found, try the chef's suggestion";
                     divRes.appendChild(parrResultado)
                     divResultados.appendChild(divRes);
                 }
