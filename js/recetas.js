@@ -11,7 +11,7 @@ btn_buscar.addEventListener('click', consultarReseta);
 btn_sugerencia.addEventListener('click', sugerenciaChef);
 
 function sugerenciaChef(){
-    //document.getElementById("txt_buscar").value='';
+    document.getElementById("txt_buscar").value='';
     divResultados.innerHTML='';
     parrResultado.innerText='Gracias por elegir la sugerencia del chef.';
     divRes.appendChild(parrResultado)
@@ -42,7 +42,6 @@ function getRecetas(valor) {
 function consultarResetaRandom(){
     getRecetasRandom().then(function(data){
         console.log(data);
-        document.getElementById("txt_buscar").value = '';
         muestraReceta(data[0]);
     })
 }
