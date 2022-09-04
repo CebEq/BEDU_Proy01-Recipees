@@ -15,9 +15,9 @@ btn_sugerencia.addEventListener('click', sugerenciaChef);
 // Trigger function for random recipe, fires function to fetch
 // a random recipe
 function sugerenciaChef(){
-    document.getElementById("txt_buscar").value='';
-    divResultados.innerHTML='';
-    parrResultado.innerText="Thank you for choosing the chef's suggestion";
+    document.getElementById("txt_buscar").value = '';
+    divResultados.innerHTML = '';
+    parrResultado.innerText = "Thank you for choosing the chef's suggestion.";
     divRes.appendChild(parrResultado)
     divResultados.appendChild(divRes);
     consultarResetaRandom();
@@ -61,7 +61,7 @@ function consultarReseta(){
     divResultados.innerHTML='';
     document.getElementById("div_modal").innerHTML='';
     if (valor.length==0){
-        parrResultado.innerText = 'Ingresa una reseta para buscar o elije la sugerencia del chef.';
+        parrResultado.innerText = "Enter a recipe to search or choose the chef's suggestion.";
         divRes.appendChild(parrResultado)
         divResultados.appendChild(divRes);
     }
@@ -77,7 +77,7 @@ function consultarReseta(){
                     })
                 }
                 else{
-                    parrResultado.innerText = "Sorry, the recipe you are looking for was not found, try the chef's suggestion";
+                    parrResultado.innerText = "Sorry, the recipe you are looking for was not found, try the chef's suggestion.";
                     divRes.appendChild(parrResultado)
                     divResultados.appendChild(divRes);
                 }
