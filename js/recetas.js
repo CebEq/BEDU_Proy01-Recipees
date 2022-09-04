@@ -16,8 +16,8 @@ btn_sugerencia.addEventListener('click', sugerenciaChef);
 // a random recipe
 function sugerenciaChef(){
     document.getElementById("txt_buscar").value='';
-    divResultados.innerHTML = '';
-    parrResultado.innerText = 'Gracias por elegir la sugerencia del chef.';
+    divResultados.innerHTML='';
+    parrResultado.innerText="Thank you for choosing the chef's suggestion";
     divRes.appendChild(parrResultado)
     divResultados.appendChild(divRes);
     consultarResetaRandom();
@@ -61,7 +61,7 @@ function consultarReseta(){
     divResultados.innerHTML='';
     document.getElementById("div_modal").innerHTML='';
     if (valor.length==0){
-        parrResultado.innerText='Ingresa una reseta para buscar o elije la sugerencia del chef.';
+        parrResultado.innerText = 'Ingresa una reseta para buscar o elije la sugerencia del chef.';
         divRes.appendChild(parrResultado)
         divResultados.appendChild(divRes);
     }
@@ -77,7 +77,7 @@ function consultarReseta(){
                     })
                 }
                 else{
-                    parrResultado.innerText='Lo sentimos, no se encontró la reseta que buscas, prueba la sugerencia del chef.';
+                    parrResultado.innerText = 'Sorry, the recipe you are looking for was not found, try the chef's suggestion';
                     divRes.appendChild(parrResultado)
                     divResultados.appendChild(divRes);
                 }
@@ -127,10 +127,9 @@ function creaCard(obj){
 
 // Creates the content for a full recipe
 function muestraReceta(obj){
-    console.log(obj);
     divResultados.innerHTML='';
-    parrResultado.innerText='¡¡Excelente elección!!';
-    divRes.appendChild(parrResultado)
+    parrResultado.innerText = 'Excellent choice!';
+    divRes.appendChild(parrResultado);
     divResultados.appendChild(divRes);
     document.getElementById("div_modal").innerHTML = '';
     document.getElementById("div_modal").display = "block";
@@ -144,13 +143,12 @@ function muestraReceta(obj){
     const parrInstr = document.createElement('p');
     const parrInstr2 = document.createElement('p');
     const btnCerrar = document.createElement('button');
-
-    btnCerrar.innerText ='Cerrar';
+    btnCerrar.innerText = 'Close';
     btnCerrar.id = 'btn_cerrar';
-    btnCerrar.className ='btn btn-primary btn-lg px-4 gap-3';
+    btnCerrar.className = 'btn btn-primary btn-lg px-4 gap-3';
     btnCerrar.onclick = function(){
-        document.getElementById("div_modal").innerHTML='';
-        parrResultado.innerText='¡¡Busca algo nuevo para hoy!!';
+        document.getElementById("div_modal").innerHTML = '';
+        parrResultado.innerText = 'Find something new for today!!';
         document.getElementById("txt_buscar").value='';
     }
 
@@ -177,17 +175,16 @@ function muestraReceta(obj){
 
     parr.className = 'card-text';
     parr.id = 'region';
-    parr.innerText = 'Región: ' + obj.strArea;
-
+    parr.innerText = 'Region: ' + obj.strArea;
     parr2.className = 'card-text';
     parr2.id = 'category';
-    parr2.innerText = 'Categoría: ' + obj.strCategory;
+    parr2.innerText = 'Category: ' + obj.strCategory;
 
     const divIngredientesContenedor = document.createElement('div');
     divIngredientesContenedor.id = 'div_ingredients';
     const titIngredientes = document.createElement('div');
     titIngredientes.id = 'div_ingredients_title';
-    titIngredientes.innerText = 'INGREDIENTES - MEDIDAS';
+    titIngredientes.innerText = 'INGREDIENTS - QUANTITY';
     divIngredientesContenedor.appendChild(titIngredientes);
     const ulIngredientes = document.createElement('ul');
     ulIngredientes.id = 'ingredients_list';
@@ -206,7 +203,7 @@ function muestraReceta(obj){
     }
     divIngredientesContenedor.appendChild(ulIngredientes);
 
-    parrInstr.innerText = 'Instrucciones: ';
+    parrInstr.innerText = 'Instructions: ';
     parrInstr2.innerText = obj.strInstructions;
     
     subCard.appendChild(img);
