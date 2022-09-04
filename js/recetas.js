@@ -43,7 +43,6 @@ function getRecetas(valor) {
 
 function consultarResetaRandom(){
     getRecetasRandom().then(function(data){
-        console.log(data);
         document.getElementById("txt_buscar").value=data[0].strMeal;
         consultarReseta();
     })
@@ -118,14 +117,12 @@ function creaCard(obj){
 }
 
 function muestraReceta(obj){
-    console.log(obj);
     divResultados.innerHTML='';
     parrResultado.innerText='Excellent choice!';
     divRes.appendChild(parrResultado)
     divResultados.appendChild(divRes);
     document.getElementById("div_modal").innerHTML='';
     document.getElementById("div_modal").display="block";
-
 
     const card = document.createElement('div');
     const img = document.createElement('img');
@@ -139,7 +136,7 @@ function muestraReceta(obj){
     btnCerrar.className ='btn btn-primary btn-lg px-4 gap-3';
     btnCerrar.onclick = function(){
         document.getElementById("div_modal").innerHTML='';
-        parrResultado.innerText='Find something new for today!!!';
+        parrResultado.innerText='Find something new for today!!';
         document.getElementById("txt_buscar").value='';
     }
     parrInstr.style='text-align:left;'
