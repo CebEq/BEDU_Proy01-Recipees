@@ -7,7 +7,6 @@ const parrResultado=document.createElement('h3');
 
 divRes.style='color:bisque;';
 
-
 btn_buscar.addEventListener('click',consultarReseta);
 btn_sugerencia.addEventListener('click',sugereniaChef);
 
@@ -19,7 +18,6 @@ function sugereniaChef(){
     divResultados.appendChild(divRes);
     consultarResetaRandom();
 }
-
 
 function getRecetas(valor) {
         return fetch('https://www.themealdb.com/api/json/v1/1/search.php?s='+valor)
@@ -48,13 +46,10 @@ function consultarResetaRandom(){
         console.log(data);
         document.getElementById("txt_buscar").value=data[0].strMeal;
         consultarReseta();
-
     })
 }
 
-
-
- function consultarReseta(){ 
+function consultarReseta(){ 
     const valor=document.getElementById("txt_buscar").value;
     divResultados.innerHTML='';
     document.getElementById("div_modal").innerHTML='';
@@ -62,7 +57,6 @@ function consultarResetaRandom(){
         parrResultado.innerText='Ingresa una reseta para buscar o elije la sugerencia del chef';
         divRes.appendChild(parrResultado)
         divResultados.appendChild(divRes);
-
     }
     else{
 
@@ -126,7 +120,7 @@ function creaCard(obj){
 function muestraReceta(obj){
     console.log(obj);
     divResultados.innerHTML='';
-    parrResultado.innerText='Excelente Elección!!!!!';
+    parrResultado.innerText='¡¡Excelente Elección!!';
     divRes.appendChild(parrResultado)
     divResultados.appendChild(divRes);
     document.getElementById("div_modal").innerHTML='';
@@ -199,9 +193,7 @@ function muestraReceta(obj){
     subCard.appendChild(parrInstr);
     subCard.appendChild(btnCerrar);
     
-    
     card.appendChild(subCard);
-
 
     document.getElementById("div_modal").appendChild(card);
    
