@@ -7,20 +7,25 @@ const parrResultado = document.createElement('h3');
 
 divRes.style='color:bisque;';
 
+// Binds search and random functions to a click event on their
+// respective buttons
 btn_buscar.addEventListener('click', consultarReseta);
 btn_sugerencia.addEventListener('click', sugerenciaChef);
 
+// Trigger function for random recipe, fires function to fetch
+// a random recipe
 function sugerenciaChef(){
     document.getElementById("txt_buscar").value='';
-    divResultados.innerHTML='';
-    parrResultado.innerText='Gracias por elegir la sugerencia del chef.';
+    divResultados.innerHTML = '';
+    parrResultado.innerText = 'Gracias por elegir la sugerencia del chef.';
     divRes.appendChild(parrResultado)
     divResultados.appendChild(divRes);
     consultarResetaRandom();
 }
 
+// Fetches recipes from the API based on input value
 function getRecetas(valor) {
-    return fetch('https://www.themealdb.com/api/json/v1/1/search.php?s='+valor)
+    return fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=' + valor)
         .then(function (response) {
             return response.json();
         })
@@ -29,7 +34,8 @@ function getRecetas(valor) {
         })
   }
 
-  function getRecetasRandom() {
+// Fetches a random recipe from the API
+function getRecetasRandom() {
     return fetch('https://www.themealdb.com/api/json/v1/1/random.php')
         .then(function (response) {
             return response.json();
@@ -39,6 +45,7 @@ function getRecetas(valor) {
         })
 }
 
+// Fires the function to show the recipe based on the random recipe
 function consultarResetaRandom(){
     getRecetasRandom().then(function(data){
         console.log(data);
@@ -46,6 +53,9 @@ function consultarResetaRandom(){
     })
 }
 
+// Gets the value to search for, fires the function to search for it
+// on the API and shows the results or a message to indicate if there
+// weren't results or the user didn't input anything to search for
 function consultarReseta(){ 
     const valor = document.getElementById("txt_buscar").value;
     divResultados.innerHTML='';
@@ -75,6 +85,7 @@ function consultarReseta(){
         }
 }
 
+// Creates a presentation card for a recipe (search results)
 function creaCard(obj){
     const card = document.createElement('div');
     const img = document.createElement('img');
@@ -114,6 +125,7 @@ function creaCard(obj){
     return card;
 }
 
+// Creates the content for a full recipe
 function muestraReceta(obj){
     console.log(obj);
     divResultados.innerHTML='';
