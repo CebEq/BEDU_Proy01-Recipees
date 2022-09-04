@@ -133,6 +133,12 @@ div#title {
     font-weight: bold;
 }
 
+#div_modal #ingredients_list {
+    text-align: center;
+    list-style-position: inside;
+    padding-left: 0;
+}
+
 #div_modal #instr_intro {
     font-weight: bold;
     margin-bottom: 0;
