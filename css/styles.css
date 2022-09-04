@@ -19,44 +19,12 @@ body {
     background: white;
     background-image: linear-gradient(90deg, rgba(200, 0, 0, 0.5) 50%, transparent 0),
                       linear-gradient(rgba(200, 0, 0, 0.5) 50%, transparent 0);
-    background-size: 30px 30px;
-    /* background: linear-gradient(160deg, rgba(var(--camel),1) 40%, rgba(124,93,61,1) 100%); */
+    background-size: 35px 35px;
   }
 
 h1 {
     color: rgba(var(--liver), 1);
 }
-
-/* .bg {
-    animation:slide 3s ease-in-out infinite alternate;
-    background-image: linear-gradient(-60deg, rgba(var(--vermilion), 1) 50%, rgba(var(--maximum-green), 1) 50%);
-    bottom:0;
-    left:-50%;
-    opacity:.5;
-    position:fixed;
-    right:-50%;
-    top:0;
-    z-index:-1;
-}
- 
-.bg2 {
-    animation-direction:alternate-reverse;
-    animation-duration:4s;
-}
- 
-.bg3 {
-    animation-duration:5s;
-}
-
-@keyframes slide {
-    0% {
-        transform:translateX(-25%);
-    }
- 
-    100% {
-        transform:translateX(25%);
-    }
-} */
 
 .div_container {
     background-image: url("../assets/fondo.jpeg");
@@ -104,13 +72,13 @@ div#title {
 
 #div_modalContenedor {
     text-align: center;
-    width: 95%;
-    margin-left: 35px;
-    padding-left: 35px;
 }
 
 #div_modal {
     padding-bottom: 2vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #div_modal > .card {
@@ -149,4 +117,23 @@ div#title {
     border: none;
     background-color: rgba(var(--camel), 0.75);
     color: rgba(var(--isabelline), 1);
+}
+
+#div_modal #recipe_image {
+    border-radius: 0.5em;
+    border: none;
+}
+
+#div_modal #recipe_title {
+    margin-top: 1vmin;
+    margin-bottom: 2vmin;
+}
+
+#div_modal #div_ingredients_title {
+    font-weight: bold;
+}
+
+#div_modal #instr_intro {
+    font-weight: bold;
+    margin-bottom: 0;
 }

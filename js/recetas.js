@@ -1,16 +1,20 @@
 
-const divResultados= document.getElementById('div_resFila');
+const divResultados = document.getElementById('div_resFila');
 const btn_buscar = document.getElementById('btn_buscar');
 const btn_sugerencia = document.getElementById('btn_sugerencia');
 const divRes = document.createElement('div');
-const parrResultado=document.createElement('h3');
+const parrResultado = document.createElement('h3');
 
 divRes.style='color:bisque;';
 
-btn_buscar.addEventListener('click',consultarReseta);
-btn_sugerencia.addEventListener('click',sugereniaChef);
+// Binds search and random functions to a click event on their
+// respective buttons
+btn_buscar.addEventListener('click', consultarReseta);
+btn_sugerencia.addEventListener('click', sugerenciaChef);
 
-function sugereniaChef(){
+// Trigger function for random recipe, fires function to fetch
+// a random recipe
+function sugerenciaChef(){
     document.getElementById("txt_buscar").value='';
     divResultados.innerHTML='';
     parrResultado.innerText="Thank you for choosing the chef's suggestion";
@@ -19,48 +23,51 @@ function sugereniaChef(){
     consultarResetaRandom();
 }
 
+// Fetches recipes from the API based on input value
 function getRecetas(valor) {
-        return fetch('https://www.themealdb.com/api/json/v1/1/search.php?s='+valor)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function(data){
-                return data.meals||[];
-            })
-        
+    return fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=' + valor)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function(data){
+            return data.meals || [];
+        })
   }
 
-  function getRecetasRandom() {
+// Fetches a random recipe from the API
+function getRecetasRandom() {
     return fetch('https://www.themealdb.com/api/json/v1/1/random.php')
         .then(function (response) {
             return response.json();
         })
         .then(function(data){
-            return data.meals||[];
+            return data.meals || [];
         })
-    
 }
 
+// Fires the function to show the recipe based on the random recipe
 function consultarResetaRandom(){
     getRecetasRandom().then(function(data){
-        document.getElementById("txt_buscar").value=data[0].strMeal;
-        consultarReseta();
+        console.log(data);
+        muestraReceta(data[0]);
     })
 }
 
+// Gets the value to search for, fires the function to search for it
+// on the API and shows the results or a message to indicate if there
+// weren't results or the user didn't input anything to search for
 function consultarReseta(){ 
-    const valor=document.getElementById("txt_buscar").value;
+    const valor = document.getElementById("txt_buscar").value;
     divResultados.innerHTML='';
     document.getElementById("div_modal").innerHTML='';
     if (valor.length==0){
-        parrResultado.innerText="Enter a recipe to search or choose the chef's suggestion";
+        parrResultado.innerText = 'Ingresa una reseta para buscar o elije la sugerencia del chef.';
         divRes.appendChild(parrResultado)
         divResultados.appendChild(divRes);
     }
     else{
-
         getRecetas(valor).then(function(data){
-                const i=0;
+                const i = 0;
                 if (data.length>0){
                     data.forEach(element => {
                         const divContendor = document.createElement('div');
@@ -70,15 +77,15 @@ function consultarReseta(){
                     })
                 }
                 else{
-                    parrResultado.innerText="Sorry, the recipe you are looking for was not found, try the chef's suggestion";
+                    parrResultado.innerText = 'Sorry, the recipe you are looking for was not found, try the chef's suggestion';
                     divRes.appendChild(parrResultado)
                     divResultados.appendChild(divRes);
                 }
             });
         }
-
 }
 
+// Creates a presentation card for a recipe (search results)
 function creaCard(obj){
     const card = document.createElement('div');
     const img = document.createElement('img');
@@ -86,43 +93,46 @@ function creaCard(obj){
     const titulo = document.createElement('h3');
     const parr = document.createElement('p');
     const parr2 = document.createElement('p');
+
     img.onclick = function () {
         muestraReceta(obj);
     };
     img.style.cursor='pointer'; 
-    card.className='card';
-    card.style='width: 18rem;'
 
-    titulo.className='card-title';
-    titulo.innerText=obj.strMeal;
+    card.className = 'card';
+    card.style = 'width: 18rem;';
+
+    titulo.className = 'card-title';
+    titulo.innerText = obj.strMeal;
     
-    subCard.className='card-body';
+    subCard.className = 'card-body';
 
-    img.className='card-img-top';
-    img.src=obj.strMealThumb;
+    img.className = 'card-img-top';
+    img.src = obj.strMealThumb;
 
-    parr.className='card-text';
-    parr2.className='card-text';
+    parr.className = 'card-text';
+    parr2.className = 'card-text';
 
-    parr.innerText=obj.strArea;
-    parr2.innerText=obj.strCategory;
+    parr.innerText = obj.strArea;
+    parr2.innerText = obj.strCategory;
 
     subCard.appendChild(titulo);
     subCard.appendChild(parr);
     subCard.appendChild(parr2);
     card.appendChild(img);
     card.appendChild(subCard);
-    return card;
 
+    return card;
 }
 
+// Creates the content for a full recipe
 function muestraReceta(obj){
     divResultados.innerHTML='';
-    parrResultado.innerText='Excellent choice!';
-    divRes.appendChild(parrResultado)
+    parrResultado.innerText = 'Excellent choice!';
+    divRes.appendChild(parrResultado);
     divResultados.appendChild(divRes);
-    document.getElementById("div_modal").innerHTML='';
-    document.getElementById("div_modal").display="block";
+    document.getElementById("div_modal").innerHTML = '';
+    document.getElementById("div_modal").display = "block";
 
     const card = document.createElement('div');
     const img = document.createElement('img');
@@ -131,40 +141,55 @@ function muestraReceta(obj){
     const parr = document.createElement('p');
     const parr2 = document.createElement('p');
     const parrInstr = document.createElement('p');
+    const parrInstr2 = document.createElement('p');
     const btnCerrar = document.createElement('button');
-    btnCerrar.innerText ='Close';
-    btnCerrar.className ='btn btn-primary btn-lg px-4 gap-3';
+    btnCerrar.innerText = 'Close';
+    btnCerrar.id = 'btn_cerrar';
+    btnCerrar.className = 'btn btn-primary btn-lg px-4 gap-3';
     btnCerrar.onclick = function(){
-        document.getElementById("div_modal").innerHTML='';
-        parrResultado.innerText='Find something new for today!!';
+        document.getElementById("div_modal").innerHTML = '';
+        parrResultado.innerText = 'Find something new for today!!';
         document.getElementById("txt_buscar").value='';
     }
-    parrInstr.style='text-align:left;'
 
-    img.style ='width:40%; height; 40%;'
+    parrInstr.style = 'text-align:left;';
+    parrInstr.id = 'instr_intro';
+
+    parrInstr2.style = 'text-align:left;';
+    parrInstr2.id = 'instr_details';
+
     card.className = 'card';
+    card.id = 'recipe_result';
     card.style = 'width: 90%; text-align:center;'
 
-    titulo.className='card-title';
-    titulo.innerText=obj.strMeal;
+    titulo.className = 'card-title';
+    titulo.id = 'recipe_title'
+    titulo.innerText = obj.strMeal;
     
     subCard.className = 'card-body';
 
-    img.className='card-img-top';
-    img.src=obj.strMealThumb;
+    img.className = 'card-img-top';
+    img.src = obj.strMealThumb;
+    img.style = 'width:40%; height; 40%;';
+    img.id = 'recipe_image';
 
-    parr.className ='card-text';
-    parr2.className ='card-text';
-
-    parr.innerText ='Region: ' + obj.strArea;
-    parr2.innerText ='Category: ' + obj.strCategory;
+    parr.className = 'card-text';
+    parr.id = 'region';
+    parr.innerText = 'Region: ' + obj.strArea;
+    parr2.className = 'card-text';
+    parr2.id = 'category';
+    parr2.innerText = 'Category: ' + obj.strCategory;
 
     const divIngredientesContenedor = document.createElement('div');
+    divIngredientesContenedor.id = 'div_ingredients';
+    const titIngredientes = document.createElement('div');
+    titIngredientes.id = 'div_ingredients_title';
+    titIngredientes.innerText = 'INGREDIENTS - QUANTITY';
+    divIngredientesContenedor.appendChild(titIngredientes);
     const ulIngredientes = document.createElement('ul');
+    ulIngredientes.id = 'ingredients_list';
 
     const liIngredientes = document.createElement('li');
-    liIngredientes.innerText='INGREDIENTS - QUANTITY';
-    ulIngredientes.appendChild(liIngredientes)
 
     for(let ing of Object.keys(obj)){
        let idIngrediente=ing.substring(13,ing.length);
@@ -178,8 +203,8 @@ function muestraReceta(obj){
     }
     divIngredientesContenedor.appendChild(ulIngredientes);
 
-
-    parrInstr.innerText ='Instructions: ' +  obj.strInstructions;
+    parrInstr.innerText = 'Instructions: ';
+    parrInstr2.innerText = obj.strInstructions;
     
     subCard.appendChild(img);
 
@@ -188,10 +213,10 @@ function muestraReceta(obj){
     subCard.appendChild(parr2);
     subCard.appendChild(divIngredientesContenedor);
     subCard.appendChild(parrInstr);
+    subCard.appendChild(parrInstr2);
     subCard.appendChild(btnCerrar);
     
     card.appendChild(subCard);
 
     document.getElementById("div_modal").appendChild(card);
-   
 }
