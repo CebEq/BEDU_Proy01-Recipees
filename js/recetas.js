@@ -83,26 +83,28 @@ function creaCard(obj){
     const titulo = document.createElement('h3');
     const parr = document.createElement('p');
     const parr2 = document.createElement('p');
+
     img.onclick = function () {
         muestraReceta(obj);
     };
     img.style.cursor='pointer'; 
-    card.className='card';
-    card.style='width: 18rem;'
 
-    titulo.className='card-title';
-    titulo.innerText=obj.strMeal;
+    card.className = 'card';
+    card.style = 'width: 18rem;';
+
+    titulo.className = 'card-title';
+    titulo.innerText = obj.strMeal;
     
-    subCard.className='card-body';
+    subCard.className = 'card-body';
 
-    img.className='card-img-top';
-    img.src=obj.strMealThumb;
+    img.className = 'card-img-top';
+    img.src = obj.strMealThumb;
 
-    parr.className='card-text';
-    parr2.className='card-text';
+    parr.className = 'card-text';
+    parr2.className = 'card-text';
 
-    parr.innerText=obj.strArea;
-    parr2.innerText=obj.strCategory;
+    parr.innerText = obj.strArea;
+    parr2.innerText = obj.strCategory;
 
     subCard.appendChild(titulo);
     subCard.appendChild(parr);
@@ -159,7 +161,8 @@ function muestraReceta(obj){
 
     img.className = 'card-img-top';
     img.src = obj.strMealThumb;
-    img.style = 'width:40%; height; 40%;'
+    img.style = 'width:40%; height; 40%;';
+    img.id = 'recipe_image';
 
     parr.className = 'card-text';
     parr.id = 'region';

@@ -154,6 +154,11 @@ div#title {
     color: rgba(var(--isabelline), 1);
 }
 
+#div_modal #recipe_image {
+    border-radius: 0.5em;
+    border: none;
+}
+
 #div_modal #recipe_title {
     margin-top: 1vmin;
     margin-bottom: 2vmin;
