@@ -42,8 +42,7 @@ function getRecetas(valor) {
 function consultarResetaRandom(){
     getRecetasRandom().then(function(data){
         console.log(data);
-        //document.getElementById("txt_buscar").value = data[0].strMeal;
-        //consultarReseta();
+        document.getElementById("txt_buscar").value = '';
         muestraReceta(data[0]);
     })
 }
