@@ -1,33 +1,32 @@
 
-const divResultados= document.getElementById('div_resFila');
+const divResultados = document.getElementById('div_resFila');
 const btn_buscar = document.getElementById('btn_buscar');
 const btn_sugerencia = document.getElementById('btn_sugerencia');
 const divRes = document.createElement('div');
-const parrResultado=document.createElement('h3');
+const parrResultado = document.createElement('h3');
 
 divRes.style='color:bisque;';
 
-btn_buscar.addEventListener('click',consultarReseta);
-btn_sugerencia.addEventListener('click',sugereniaChef);
+btn_buscar.addEventListener('click', consultarReseta);
+btn_sugerencia.addEventListener('click', sugerenciaChef);
 
-function sugereniaChef(){
-    document.getElementById("txt_buscar").value='';
+function sugerenciaChef(){
+    //document.getElementById("txt_buscar").value='';
     divResultados.innerHTML='';
-    parrResultado.innerText='Gracias por elegir la sugerencia del chef';
+    parrResultado.innerText='Gracias por elegir la sugerencia del chef.';
     divRes.appendChild(parrResultado)
     divResultados.appendChild(divRes);
     consultarResetaRandom();
 }
 
 function getRecetas(valor) {
-        return fetch('https://www.themealdb.com/api/json/v1/1/search.php?s='+valor)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function(data){
-                return data.meals||[];
-            })
-        
+    return fetch('https://www.themealdb.com/api/json/v1/1/search.php?s='+valor)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function(data){
+            return data.meals || [];
+        })
   }
 
   function getRecetasRandom() {
@@ -36,9 +35,8 @@ function getRecetas(valor) {
             return response.json();
         })
         .then(function(data){
-            return data.meals||[];
+            return data.meals || [];
         })
-    
 }
 
 function consultarResetaRandom(){
@@ -50,18 +48,17 @@ function consultarResetaRandom(){
 }
 
 function consultarReseta(){ 
-    const valor=document.getElementById("txt_buscar").value;
+    const valor = document.getElementById("txt_buscar").value;
     divResultados.innerHTML='';
     document.getElementById("div_modal").innerHTML='';
     if (valor.length==0){
-        parrResultado.innerText='Ingresa una reseta para buscar o elije la sugerencia del chef';
+        parrResultado.innerText='Ingresa una reseta para buscar o elije la sugerencia del chef.';
         divRes.appendChild(parrResultado)
         divResultados.appendChild(divRes);
     }
     else{
-
         getRecetas(valor).then(function(data){
-                const i=0;
+                const i = 0;
                 if (data.length>0){
                     data.forEach(element => {
                         const divContendor = document.createElement('div');
@@ -71,13 +68,12 @@ function consultarReseta(){
                     })
                 }
                 else{
-                    parrResultado.innerText='Lo sentimos, no se encontro la reseta que buscas, prueba la sugerencia del chef';
+                    parrResultado.innerText='Lo sentimos, no se encontró la reseta que buscas, prueba la sugerencia del chef.';
                     divRes.appendChild(parrResultado)
                     divResultados.appendChild(divRes);
                 }
             });
         }
-
 }
 
 function creaCard(obj){
@@ -113,19 +109,18 @@ function creaCard(obj){
     subCard.appendChild(parr2);
     card.appendChild(img);
     card.appendChild(subCard);
-    return card;
 
+    return card;
 }
 
 function muestraReceta(obj){
     console.log(obj);
     divResultados.innerHTML='';
-    parrResultado.innerText='¡¡Excelente Elección!!';
+    parrResultado.innerText='¡¡Excelente elección!!';
     divRes.appendChild(parrResultado)
     divResultados.appendChild(divRes);
-    document.getElementById("div_modal").innerHTML='';
-    document.getElementById("div_modal").display="block";
-
+    document.getElementById("div_modal").innerHTML = '';
+    document.getElementById("div_modal").display = "block";
 
     const card = document.createElement('div');
     const img = document.createElement('img');
@@ -134,40 +129,56 @@ function muestraReceta(obj){
     const parr = document.createElement('p');
     const parr2 = document.createElement('p');
     const parrInstr = document.createElement('p');
+    const parrInstr2 = document.createElement('p');
     const btnCerrar = document.createElement('button');
+
     btnCerrar.innerText ='Cerrar';
+    btnCerrar.id = 'btn_cerrar';
     btnCerrar.className ='btn btn-primary btn-lg px-4 gap-3';
     btnCerrar.onclick = function(){
         document.getElementById("div_modal").innerHTML='';
-        parrResultado.innerText='Busca algo nuevo para hoy!!!';
+        parrResultado.innerText='¡¡Busca algo nuevo para hoy!!';
         document.getElementById("txt_buscar").value='';
     }
-    parrInstr.style='text-align:left;'
 
-    img.style ='width:40%; height; 40%;'
+    parrInstr.style = 'text-align:left;';
+    parrInstr.id = 'instr_intro';
+
+    parrInstr2.style = 'text-align:left;';
+    parrInstr2.id = 'instr_details';
+
     card.className = 'card';
+    card.id = 'recipe_result';
     card.style = 'width: 90%; text-align:center;'
 
-    titulo.className='card-title';
-    titulo.innerText=obj.strMeal;
+    titulo.className = 'card-title';
+    titulo.id = 'recipe_title'
+    titulo.innerText = obj.strMeal;
     
     subCard.className = 'card-body';
 
-    img.className='card-img-top';
-    img.src=obj.strMealThumb;
+    img.className = 'card-img-top';
+    img.src = obj.strMealThumb;
+    img.style = 'width:40%; height; 40%;'
 
-    parr.className ='card-text';
-    parr2.className ='card-text';
+    parr.className = 'card-text';
+    parr.id = 'region';
+    parr.innerText = 'Región: ' + obj.strArea;
 
-    parr.innerText ='Región: ' + obj.strArea;
-    parr2.innerText ='Categoría: ' + obj.strCategory;
+    parr2.className = 'card-text';
+    parr2.id = 'category';
+    parr2.innerText = 'Categoría: ' + obj.strCategory;
 
     const divIngredientesContenedor = document.createElement('div');
+    divIngredientesContenedor.id = 'div_ingredients';
+    const titIngredientes = document.createElement('div');
+    titIngredientes.id = 'div_ingredients_title';
+    titIngredientes.innerText = 'INGREDIENTES - MEDIDAS';
+    divIngredientesContenedor.appendChild(titIngredientes);
     const ulIngredientes = document.createElement('ul');
+    ulIngredientes.id = 'ingredients_list';
 
     const liIngredientes = document.createElement('li');
-    liIngredientes.innerText='INGREDIENTES - MEDIDAS';
-    ulIngredientes.appendChild(liIngredientes)
 
     for(let ing of Object.keys(obj)){
        let idIngrediente=ing.substring(13,ing.length);
@@ -181,8 +192,8 @@ function muestraReceta(obj){
     }
     divIngredientesContenedor.appendChild(ulIngredientes);
 
-
-    parrInstr.innerText ='Instrucciones: ' +  obj.strInstructions;
+    parrInstr.innerText = 'Instrucciones: ';
+    parrInstr2.innerText = obj.strInstructions;
     
     subCard.appendChild(img);
 
@@ -191,10 +202,10 @@ function muestraReceta(obj){
     subCard.appendChild(parr2);
     subCard.appendChild(divIngredientesContenedor);
     subCard.appendChild(parrInstr);
+    subCard.appendChild(parrInstr2);
     subCard.appendChild(btnCerrar);
     
     card.appendChild(subCard);
 
     document.getElementById("div_modal").appendChild(card);
-   
 }
